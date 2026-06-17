@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaw's Jerk Stop</title>
+
+<link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+<header>
+<img src="logo.jpg">
+<h1>Shaw's Jerk Stop</h1>
+<p>Authentic Jamaican Flavour 🇯🇲</p>
+<p>Open Wed & Sat | 3PM - 8PM</p>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="menu.html">Menu</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<div class="carousel">
+
+    <div class="hero-text">
+        <h1>Welcome to Shaw's Jerk Stop</h1>
+        <p>Authentic Jamaican Food</p>
+    </div>
+
+    <img id="slide" src="ripeplantains.jpg" alt="Jamaican Food">
+
+</div>
+
+<section id="menu">
+<h2>Menu</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="jerkchicken.jpg">
+<h3>Jerk Chicken</h3>
+<p>£8.00</p>
+<button onclick="addToCart('Jerk Chicken', 8.00)">Add</button>
+</div>
+
+<div class="card">
+<img src="loadedjerkwedges.jpg">
+<h3>Loaded Jerk Wedges</h3>
+<p>£10.00</p>
+<button onclick="addToCart('Loaded Jerk Wedges', 10.00)">Add</button>
+</div>
+
+<div class="card">
+<img src="curriedgoat.jpg">
+<h3>Curried Goat</h3>
+<p>£12.50</p>
+<button onclick="addToCart('Curried Goat', 12.50)">Add</button>
+</div>
+
+<div class="card">
+<img src="friedchicken.jpg">
+<h3>Fried Chicken</h3>
+<p>£7.50</p>
+<button onclick="addToCart('Fried Chicken', 7.50)">Add</button>
+</div>
+
+<div class="card">
+<img src="ripeplantains.jpg">
+<h3>Plantain</h3>
+<p>£2.00</p>
+<button onclick="addToCart('Plantain', 2.00)">Add</button>
+</div>
+
+<div class="card">
+<img src="brownstewchicken.jpg">
+<h3>Brown Stew Chicken</h3>
+<p>£9.00</p>
+<button onclick="addToCart('Brown Stew Chicken', 9.00)">Add</button>
+</div>
+
+<div class="card">
+<img src="festivals.jpg">
+<h3>Festivals</h3>
+<p>£5.00</p>
+<button onclick="addToCart('Festivals', 5.00)">Add</button>
+</div>
+
+<div class="card">
+<img src="riceandpeas.jpg">
+<h3>Rice and Peas</h3>
+<p>£5.00</p>
+<button onclick="addToCart('Rice and Peas', 5.00)">Add</button>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>📞 07405532538</p>
+</section>
+
+<!-- CART -->
+<div id="cart">
+<h3>Your Order</h3>
+<ul id="cart-items"></ul>
+<p>Total: £<span id="total">0</span></p>
+
+<input type="text" id="name" placeholder="Your Name">
+<input type="text" id="address" placeholder="Address (optional)">
+
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let cart = [];
+let total = 0;
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    total += price;
+    updateCart();
+}
+
+function removeItem(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function updateCart() {
+    let list = document.getElementById("cart-items");
+    list.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = item.name + " - £" + item.price + 
+        " <button onclick='removeItem(" + index + ")'>X</button>";
+        list.appendChild(li);
+    });
+
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function checkout() {
+
+    let name =
+    document.getElementById("customerName").value;
+
+    let address =
+    document.getElementById("customerAddress").value;
+
+    let message =
+    "Hello Shaw's Jerk Stop!%0A%0A";
+
+    message += "Name: " + name + "%0A";
+
+    message += "Address: " + address + "%0A";
+
+    message += "Total: £" + total.toFixed(2);
+
+    window.open(
+    "https://wa.me/447405532538?text=" + message
+    );
+
+}
+</script>
+
+<section id="reviews">
+
+    <h2>Customer Reviews ⭐</h2>
+
+    <div class="review-card">
+        <p>"Best jerk chicken in town!"</p>
+        <h4>- Marcus</h4>
+    </div>
+
+    <div class="review-card">
+        <p>"The loaded wedges are addictive 🔥"</p>
+        <h4>- Shanice</h4>
+    </div>
+
+<div class="review-card">
+    <p>"Amazing food and great service ⭐⭐⭐⭐⭐"</p>
+    <h4>- Sarah</h4>
+</div>
+
+<div class="review-card">
+    <p>"The best Jamaican food I've had in Blackpool 🇯🇲⭐⭐⭐⭐⭐"</p>
+    <h4>- Jason</h4>
+</div>
+
+<div class="review-card">
+    <p>"Fresh, tasty and full of flavour. Highly recommend! ⭐⭐⭐⭐⭐"</p>
+    <h4>- Kelly</h4>
+</div>
+
+</section>
+
+<script>
+
+let total = 0;
+
+function addToCart(item, price) {
+    total += price;
+
+    document.getElementById("total").innerText = total.toFixed(2);
+
+    alert(item + " added to cart!");
+}
+
+function checkout() {
+
+    let message =
+    "Hello Shaw's Jerk Stop! My total order is £" +
+    total.toFixed(2);
+
+    window.open(
+    "https://wa.me/447405532538?text=" +
+    encodeURIComponent(message)
+    );
+
+}
+
+let images = [
+    "jerkchicken.jpg",
+    "friedchicken.jpg",
+    "curriedgoat.jpg",
+    "riceandpeas.jpg"
+];
+
+let index = 0;
+
+setInterval(function () {
+
+    index++;
+
+    if(index >= images.length){
+        index = 0;
+    }
+
+    document.getElementById("slide").src = images[index];
+
+}, 3000);
+
+</script>
+
+<a href="https://wa.me/447405532538" class="whatsapp-btn" target="_blank">
+    Order Now
+</a>
+
+<div id="cart">
+    <h2>🛒 Cart Total: £<span id="total">0</span></h2>
+</div>
+
+<input type="text" id="customerName" placeholder="Your Name">
+
+<input type="text" id="customerAddress" placeholder="Delivery Address">
+ 
+<button onclick="checkout()" class="checkout-btn">
+Checkout on WhatsApp
+</button>
+
+<audio controls>
+    <source src="reggae.mp3" type="audio/mpeg">
+</audio>
+
+<footer>
+<p>
+© 2026 Shaw's Jerk Stop | Authentic Jamaican Flavour 🇯🇲
+</p>
+</footer>
+
+<script>
+const images = [
+    "ripeplantains.jpg",
+    "jerkchicken.jpg",
+    "curriedgoat.jpg",
+    "loadedjerkwedges.jpg",
+    "brownstewchicken.jpg"
+];
+
+let currentImage = 0;
+
+setInterval(() => {
+    currentImage++;
+
+    if (currentImage >= images.length) {
+        currentImage = 0;
+    }
+
+    document.getElementById("slide").src = images[currentImage];
+}, 3000);
+</script>
+
+</body>
+</html>
